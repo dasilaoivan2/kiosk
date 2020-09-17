@@ -60,7 +60,7 @@
             <div class="col">
                 {{$office->name}}
                 <br/>
-
+{{-- comment --}}
                 @foreach($office->clientservices as $clientservice)
 
                     @if($clientservice->client->nowserving==0)
