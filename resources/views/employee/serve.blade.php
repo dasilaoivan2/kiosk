@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    @include('layouts.inc.title',['title'=>"Employee - Home"])
+    @include('layouts.inc.title',['title'=>"Employee - Served Clients"])
 @endsection
 
 @section('content')
@@ -57,7 +57,7 @@
 
                                         @foreach($userservice->clients as $clientservice)
 
-                                            @if($clientservice->client->status!=2)
+                                            @if($clientservice->client->status==2)
 
                                                 <?php $temp++;?>
                                                 <tr>

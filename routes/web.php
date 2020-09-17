@@ -70,10 +70,11 @@ Route::put('/admin/offices/{id}','AdminOfficesController@update')->name('admin.o
 //EMPLOYEE ROUTES
 
 Route::get('/employee', 'EmployeeController@index')->name('employee.index');
+Route::get('/employee/servedclients', 'EmployeeController@servedClient')->name('employee.served');
 
 //javascript
 Route::post('/employee/updateclient','ClientsController@updateclient')->name('client.updateclient');
-Route::post('/employee/updateserving','ClientsController@updateserving')->name('client.updateserving');
+//Route::post('/employee/updateserving','ClientsController@updateserving')->name('client.updateserving');
 
 //Services
 

@@ -22,7 +22,7 @@
     <style>
         html, body {
             /*responsive bg*/
-            background-image: url("{{asset('public/storage/login-bg.jpg')}}");
+            background-image: url("{{asset('public/storage/dashboard-bg.jpg')}}");
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;

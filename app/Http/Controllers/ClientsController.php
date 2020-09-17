@@ -22,40 +22,40 @@ class ClientsController extends Controller
 
         $offices = Office::get()->all();
         $services = Service::get()->sortBy('description');
-        return view ('client.index')->with(['services'=>$services, 'offices'=>$offices]);
+        return view('client.index')->with(['services' => $services, 'offices' => $offices]);
     }
 
     public function second()
     {
         $offices = Office::get()->all();
-        return view ('client.second')->with(['offices'=>$offices]);
+        return view('client.second')->with(['offices' => $offices]);
     }
 
-   public function office()
-   {
-       $offices = Office::get()->all();
-       return view ('client.byoffice')->with(['offices'=>$offices]);
-   }
+    public function office()
+    {
+        $offices = Office::get()->all();
+        return view('client.byoffice')->with(['offices' => $offices]);
+    }
 
 
     public function showByOffice($id)
     {
         $office = Office::find($id);
 
-        $services = Service::where('office_id','=', $office->id)->get();
-        return view ('client.showbyoffice')->with(['services'=>$services, 'office'=>$office]);
+        $services = Service::where('office_id', '=', $office->id)->get();
+        return view('client.showbyoffice')->with(['services' => $services, 'office' => $office]);
 
     }
 
-    public function printPriority($id,$service_id){
+    public function printPriority($id, $service_id)
+    {
 
         $client = Client::find($id);
         $service = Service::find($service_id);
 
 
-        return view('client.printpriority',compact('client','service'));
+        return view('client.printpriority', compact('client', 'service'));
     }
-
 
 
     public function create($id)
@@ -63,13 +63,13 @@ class ClientsController extends Controller
         $barangays = Barangay::get()->all();
 //        $barangays = Barangay::pluck('name','id');
         $service = Service::find($id);
-        return view('client.create')->with(['service'=>$service, 'barangays'=>$barangays]);
+        return view('client.create')->with(['service' => $service, 'barangays' => $barangays]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)
@@ -155,7 +155,8 @@ class ClientsController extends Controller
 //
 //    }
 
-    public function storeClient(){
+    public function storeClient()
+    {
 
         $name = $_POST['name'];
         $contact_no = $_POST['contact_no'];
@@ -167,19 +168,17 @@ class ClientsController extends Controller
         $service = Service::find($service_id);
         $office_id = $service->office_id;
 
-        $count = Clientservice::where('office_id', '=', $office_id)->whereDate('created_at',$now)->count();
-
+        $count = Clientservice::where('office_id', '=', $office_id)->whereDate('created_at', $now)->count();
 
 
         $service_count = Clientservice::get()->count();
 
-        $count_sl= $service_count + 1;
-
+        $count_sl = $service_count + 1;
 
 
         $priority_no = $count + 1;
 
-        $sl_no = $service->id."-".$count_sl;
+        $sl_no = $service->id . "-" . $count_sl;
 
 
         $client = new Client;
@@ -189,9 +188,8 @@ class ClientsController extends Controller
         $client->contact_no = $contact_no;
         $client->barangay_id = $barangay_id;
         $client->priority_no = $priority_no;
-        $client->status =  0;
+        $client->status = 0;
         $client->save();
-
 
 
         $clientservice = new Clientservice;
@@ -200,50 +198,63 @@ class ClientsController extends Controller
         $clientservice->office_id = $office_id;
         $clientservice->save();
 
-        return response()->json(['success'=>'Data saved!','client_id'=>$client->id]);
+        return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
 
     }
 
 
-
-
-
-    public function updateclient(){
-
-
-            $id = $_POST['id'];
-
-            $client = Client::find($id);
-
-            $client->status = 1;
-
-            $client->save();
-
-            return response()->json(['success'=>'Client updated!']);
-
-
-    }
-
-    public function updateserving(){
-
+    public function updateclient()
+    {
 
         $id = $_POST['id'];
+        $status = $_POST['status'];
+
+
+
 
         $client = Client::find($id);
 
-        $client->nowserving = 1;
+        if ($status == 0) {
+
+            $client->status = 1;
+
+        } elseif ($status == 1) {
+
+            $client->status = 2;
+
+        } else {
+            $client->status = 2;
+        }
+
+
 
         $client->save();
 
-        return response()->json(['success'=>'Client updated!']);
+        return response()->json(['success' => 'Client updated!']);
 
 
     }
+
+//    public function updateserving(){
+//
+//
+//        $id = $_POST['id'];
+//
+//        $client = Client::find($id);
+//
+//        $client->nowserving = 1;
+//
+//        $client->save();
+//
+//        return response()->json(['success'=>'Client updated!']);
+//
+//
+//    }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -254,7 +265,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -265,8 +276,8 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -277,7 +288,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
