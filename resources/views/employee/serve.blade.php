@@ -94,6 +94,7 @@
 
                                                         </button>
 
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach

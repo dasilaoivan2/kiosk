@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         {{ date("l, F d, Y")}}
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -44,6 +44,7 @@
                                         <th>Barangay</th>
                                         <th>Services Acquired</th>
                                         <th>Priority No.</th>
+                                        <th>Serving</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -57,7 +58,7 @@
 
                                         @foreach($userservice->clients as $clientservice)
 
-                                            @if($clientservice->client->status!=2)
+                                            @if($clientservice->client->status!=1)
 
                                                 <?php $temp++;?>
                                                 <tr>
@@ -68,32 +69,50 @@
                                                     <td>{{$userservice->service->description}}</td>
                                                     <td>{{$clientservice->client->priority_no}}</td>
                                                     <td>
-
                                                         <button value="{{$clientservice->client->id}}"
-                                                                id="btn{{$clientservice->client->id}}"
+                                                                id="btn1{{$clientservice->client->id}}"
+                                                                clientservice_id="{{$clientservice->id}}"
                                                                 status="{{$clientservice->client->status}}"
-                                                                class="btnupdateclient btn
+                                                                class="btnupdateserve btn
 
-@if($clientservice->client->status==0)
-                                                                        btn-danger
-@elseif($clientservice->client->status==1)
+@if($clientservice->nowserving==0)
                                                                         btn-warning
 @else
-                                                                        btn-primary
+                                                                        btn-success
+@endif">
+                                                            @if($clientservice->nowserving==0)
+                                                                Waiting
+                                                            @else
+                                                                Now Serving
+                                                            @endif
+
+
+                                                        </button>
+
+                                                    </td>
+
+                                                    <td>
+
+                                                        <button value="{{$clientservice->client->id}}"
+                                                                         id="btn{{$clientservice->client->id}}"
+                                                                         clientservice_id="{{$clientservice->id}}"
+                                                                         status="{{$clientservice->client->status}}"
+                                                                         class="btnupdateclient btn
+
+@if($clientservice->client->status==0)
+                                                                                 btn-danger
+@else
+                                                                                 btn-primary
 @endif">
                                                             @if($clientservice->client->status==0)
-                                                                Pending<br>
-                                                                <small style="font-size: xx-small">(Serve this no.)
-                                                                </small>
-                                                            @elseif($clientservice->client->status==1)
-                                                                Now Serving
+                                                                Pending
                                                             @else
                                                                 Served
                                                             @endif
 
 
                                                         </button>
-
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -163,7 +182,43 @@
 
             $.post('{{route('client.updateclient')}}', {
                 id: $(this).attr('value'),
-                status: $(this).attr('status')
+                status: $(this).attr('status'),
+                clientservice_id: $(this).attr('clientservice_id')
+
+            }, function (data) {
+
+
+//                $(text).text('OK').removeClass('btn-danger').addClass('btn-primary');
+                window.location.reload();
+
+            }).fail(function () {
+
+                alert("Failed to create comment.");
+
+            });
+
+
+        });
+
+        $(".btnupdateserve").click(function () {
+
+            var text = "#btn1" + $(this).attr('value');
+            console.log(text);
+
+            console.log($(this).attr('value'));
+
+            $.ajaxSetup(
+                {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+            $.post('{{route('client.updateserve')}}', {
+                id: $(this).attr('value'),
+                status: $(this).attr('status'),
+                clientservice_id: $(this).attr('clientservice_id')
+
             }, function (data) {
 
 

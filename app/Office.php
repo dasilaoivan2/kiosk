@@ -13,8 +13,8 @@ class Office extends Model
     }
 
     public function clientservices(){
-
-        return $this->hasManyThrough('App\Clientservice','App\Service');
+        $now = date('Y-m-d');
+        return $this->hasManyThrough('App\Clientservice','App\Service')->whereDate('clientservices.created_at','=',$now);
 
     }
 

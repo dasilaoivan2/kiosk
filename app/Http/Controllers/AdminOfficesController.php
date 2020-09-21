@@ -54,9 +54,14 @@ class AdminOfficesController extends Controller
         $office = new Office;
 
 
+        if($request->hasFile('icon')){
+            $nameOfFile = date("Ymds")."-".$request->icon->getClientOriginalName();
+            $request->icon->storeAs('public/icons',$nameOfFile);
+        }
+        else{
+            $nameOfFile = NULL;
+        }
 
-        $nameOfFile = date("Ymds")."-".$request->icon->getClientOriginalName();
-        $request->icon->storeAs('public/icons',$nameOfFile);
 
         $office->name = $request->input('name');
         $office->code = $request->input('code');

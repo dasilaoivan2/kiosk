@@ -8,6 +8,7 @@ use App\User;
 use App\Office;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminUsersController extends Controller
 {
@@ -34,7 +35,10 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        $services = Service::pluck('description','id');
+
+        $services = Service::select(DB::raw("concat(services.description,' - ',offices.code) as name"),'services.id as id')->join('offices','offices.id','services.office_id')->get();
+
+        $services = $services->pluck('name','id');
 
         return view ('admin.users.create')->with(['services'=>$services]);
     }
@@ -93,9 +97,11 @@ class AdminUsersController extends Controller
     {
         $userservice = Userservice::find($id);
 
+        $services = Service::select(DB::raw("concat(services.description,' - ',offices.code) as name"),'services.id as id')->join('offices','offices.id','services.office_id')->get();
 
+        $services = $services->pluck('name','id');
 
-        $services = Service::pluck('description','id');
+//        $services = Service::pluck('description','id');
 
         return view ('admin.users.edit')->with(['userservice'=>$userservice, 'services'=>$services]);
     }
@@ -104,8 +110,10 @@ class AdminUsersController extends Controller
     {
         $user = User::find($id);
 
+        $services = Service::select(DB::raw("concat(services.description,' - ',offices.code) as name"),'services.id as id')->join('offices','offices.id','services.office_id')->get();
 
-        $services = Service::pluck('description','id');
+        $services = $services->pluck('name','id');
+//        $services = Service::pluck('description','id');
 
         return view ('admin.users.addservice')->with(['user'=>$user, 'services'=>$services]);
     }

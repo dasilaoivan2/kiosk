@@ -19,9 +19,8 @@ class CreateClientsTable extends Migration
             $table->text('name');
             $table->text('contact_no');
             $table->integer('barangay_id');
-            $table->integer('status')->default(0);
+            $table->boolean  ('status')->default(false);
             $table->text('priority_no');
-            $table->tinyInteger('nowserving')->default(0);
 //            $table->integer('service_id');
             $table->timestamps();
         });

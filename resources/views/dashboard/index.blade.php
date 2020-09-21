@@ -57,41 +57,50 @@
             {{--</div>--}}
         {{--</div>--}}
         <marquee width="100%" direction="left" scrollamount="12">
-            <h1 style="font-size: 50pt; font-weight: bold; font-family: 'GROBOLD'; color: black">N O W  &nbsp  S E R V I N G!  &nbsp&nbsp   N O W &nbsp S E R V I N G!   &nbsp&nbsp  N O W &nbsp S E R V I N G! &nbsp&nbsp N O W &nbsp S E R V I N G!&nbsp&nbsp</h1>
+            <h1 style="font-size: 50pt; font-weight: bold; font-family: 'GROBOLD'; color: yellow">N O W  &nbsp  S E R V I N G!  &nbsp&nbsp   N O W &nbsp S E R V I N G!   &nbsp&nbsp  N O W &nbsp S E R V I N G! &nbsp&nbsp N O W &nbsp S E R V I N G!&nbsp&nbsp</h1>
         </marquee>
 
         <div class="row">
-            <div class="col-md-6">
-                <h2 style="color: black; font-weight: bold">OFFICE NAME</h2>
+            <div style="border-bottom: dotted white 3px" class="col-md-6 text-center">
+                <h2 style="color: white; font-weight: bold">OFFICE NAME</h2>
             </div>
 
-            <div class="col-md-3 text-center">
-                <h2 style="color: black; font-weight: bold">WINDOW</h2>
+            <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                <h2 style="color: white; font-weight: bold">WINDOW</h2>
             </div>
 
-            <div class="col-md-3 text-center">
-                <h2 style="color: black; font-weight: bold">PRIORITY NO.</h2>
+            <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                <h2 style="color: white; font-weight: bold">PRIORITY NO.</h2>
             </div>
         </div>
 
+        @php
+
+            $now = date('Y-m-d');
+
+        @endphp
+
+
         @foreach($offices as $office)
         <div class="row">
-            <div class="col-md-6">
-                <h2 style="color: black; font-weight: bold">{{$office->name}}</h2>
+            <div style="border-bottom: dotted white 3px" class="col-md-6">
+                <h2 style="color: white; font-weight: bold">{{$office->name}}</h2>
 
             </div>
 {{-- comment --}}
+
+
                 @foreach($office->clientservices as $clientservice)
 
-                    @if($clientservice->client->status == 1)
+                    @if($clientservice->nowserving == 1 && $clientservice->client->status == 0)
 
-                    <div class="col-md-3 text-center">
-                        <h2 style="color: black; font-weight: bold">{{$office->window}}</h2>
+                    <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                        <h2 style="color: white; font-weight: bold">{{$office->window}}</h2>
 
                     </div>
 
-                    <div class="col-md-3 text-center">
-                        <h2 style="color: black; font-weight: bold">{{$clientservice->client->priority_no}}</h2>
+                    <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                        <h2 style="color: white; font-weight: bold">{{$clientservice->client->priority_no}}</h2>
                     </div>
 
 

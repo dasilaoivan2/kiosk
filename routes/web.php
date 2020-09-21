@@ -74,6 +74,7 @@ Route::get('/employee/servedclients', 'EmployeeController@servedClient')->name('
 
 //javascript
 Route::post('/employee/updateclient','ClientsController@updateclient')->name('client.updateclient');
+Route::post('/employee/updateserve','ClientsController@updateserve')->name('client.updateserve');
 //Route::post('/employee/updateserving','ClientsController@updateserving')->name('client.updateserving');
 
 //Services

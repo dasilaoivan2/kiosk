@@ -196,6 +196,7 @@ class ClientsController extends Controller
         $clientservice->client_id = $client->id;
         $clientservice->service_id = $service_id;
         $clientservice->office_id = $office_id;
+        $clientservice->nowserving = 0;
         $clientservice->save();
 
         return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
@@ -207,28 +208,56 @@ class ClientsController extends Controller
     {
 
         $id = $_POST['id'];
-        $status = $_POST['status'];
+        $clientservice_id = $_POST['clientservice_id'];
+//        $status = $_POST['status'];
 
 
 
 
         $client = Client::find($id);
+        $client->status = 1;
+        $client->save();
 
-        if ($status == 0) {
 
-            $client->status = 1;
+        $id_clientservice = Clientservice::find($clientservice_id);
 
-        } elseif ($status == 1) {
+        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id);
 
-            $client->status = 2;
-
-        } else {
-            $client->status = 2;
+        foreach($clientservices as $clientservice){
+            $clientservice->nowserving = 0;
+            $clientservice->save();
         }
 
 
 
-        $client->save();
+        return response()->json(['success' => 'Client updated!']);
+
+
+    }
+
+
+    public function updateserve()
+    {
+
+        $id = $_POST['id'];
+        $clientservice_id = $_POST['clientservice_id'];
+//        $status = $_POST['status'];
+
+
+
+        $id_clientservice = Clientservice::find($clientservice_id);
+
+        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->update(array('nowserving'=> 0));
+
+//        foreach($clientservices as $clientservice){
+//            $clientservice->nowserving = 0;
+//            $clientservice->save();
+//        }
+//        $clientservices->save();
+
+
+        $id_clientservice->nowserving = 1;
+        $id_clientservice->save();
 
         return response()->json(['success' => 'Client updated!']);
 
