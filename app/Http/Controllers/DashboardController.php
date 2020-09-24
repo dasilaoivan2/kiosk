@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Office;
 use App\Clientservice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -14,7 +15,9 @@ class DashboardController extends Controller
 
 $clientservice = Clientservice::latest()->first();
 
-          return view('dashboard.index',compact('offices','clientservice'));
+        $files = Storage::files('public/jpgadds');
+
+          return view('dashboard.index',compact('offices','clientservice', 'files'));
     }
 
 
