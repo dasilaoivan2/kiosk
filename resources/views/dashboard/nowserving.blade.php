@@ -24,19 +24,19 @@
 
     <div class="row" id="officename{{$office->id}}">
         <div style="border-bottom: solid 1px grey" class="col-7 text-center">
-            <h3 style="font-weight: bold; color: black">{{$office->name}}</h3>
+            <h2 style="font-weight: bold; color: black">{{$office->code}}</h2>
         </div>
         <div style="border-bottom: solid 1px grey" class="col text-center">
-            <h3 style="font-weight: bold; color: black">{{$office->window}}</h3>
+            <h2 style="font-weight: bold; color: black">{{$office->window}}</h2>
         </div>
         <div style="border-bottom: solid 1px grey" class="col text-center">
-            <h3 style="font-weight: bold; color: black" id="prioritynum{{$office->id}}">
+            <h2 style="font-weight: bold; color: black" id="prioritynum{{$office->id}}">
                 @foreach($office->clientservices as $clientservice)
                     @if($clientservice->nowserving == 1 && $clientservice->client->status == 0)
                         {{$clientservice->client->priority_no}}
                     @endif
                 @endforeach
-            </h3>
+            </h2>
         </div>
     </div>
 @endforeach
