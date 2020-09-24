@@ -105,7 +105,7 @@
                                                                                  btn-primary
 @endif">
                                                             @if($clientservice->client->status==0)
-                                                                Pending
+                                                                Serve
                                                             @else
                                                                 Served
                                                             @endif
@@ -224,6 +224,8 @@
 
 //                $(text).text('OK').removeClass('btn-danger').addClass('btn-primary');
                 window.location.reload();
+
+
 
             }).fail(function () {
 

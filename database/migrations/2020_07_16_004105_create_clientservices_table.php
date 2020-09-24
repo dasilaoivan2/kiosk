@@ -19,6 +19,7 @@ class CreateClientservicesTable extends Migration
             $table->integer('client_id');
             $table->integer('office_id');
             $table->boolean('nowserving')->default(false);
+            $table->tinyInteger('playsound')->default(0);
             $table->timestamps();
         });
     }

@@ -477,11 +477,11 @@
 </div>
 
 <div id="priority" class="bolder" style="text-align: center">
-    {{$client->priority_no}}
+    {{$service->office->window}}
 </div>
 
 <div id="window" class="bolder" style="text-align: center">
-    {{$service->office->window}}
+    {{$client->priority_no}}
 </div>
 
 

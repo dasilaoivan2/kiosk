@@ -41,6 +41,22 @@ class EmployeeController extends Controller
         return view('employee.serve',compact('user'));
     }
 
+    public function servedClientToday()
+    {
+
+        $user = User::find(Auth::user()->id);
+
+        return view('employee.servedtoday',compact('user'));
+    }
+
+    public function pendingClient()
+    {
+
+        $user = User::find(Auth::user()->id);
+
+        return view('employee.pending',compact('user'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

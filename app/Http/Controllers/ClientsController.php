@@ -19,8 +19,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-
-        $offices = Office::get()->all();
+//        $offices = Office::get()->all();
+        $offices = Office::orderBy('window','ASC')->get();
         $services = Service::get()->sortBy('description');
         return view('client.index')->with(['services' => $services, 'offices' => $offices]);
     }
@@ -33,7 +33,8 @@ class ClientsController extends Controller
 
     public function office()
     {
-        $offices = Office::get()->all();
+//        $offices = Office::get()->all();
+        $offices = Office::orderBy('window','ASC')->get();
         return view('client.byoffice')->with(['offices' => $offices]);
     }
 
@@ -221,7 +222,39 @@ class ClientsController extends Controller
 
         $id_clientservice = Clientservice::find($clientservice_id);
 
-        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id);
+        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
+
+        foreach($clientservices as $clientservice){
+            $clientservice->nowserving = 0;
+            $clientservice->save();
+        }
+
+
+
+        return response()->json(['success' => 'Client updated!']);
+
+
+    }
+
+
+    public function updateservedclient()
+    {
+
+        $id = $_POST['id'];
+        $clientservice_id = $_POST['clientservice_id'];
+//        $status = $_POST['status'];
+
+
+
+
+        $client = Client::find($id);
+        $client->status = 0;
+        $client->save();
+
+
+        $id_clientservice = Clientservice::find($clientservice_id);
+
+        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
 
         foreach($clientservices as $clientservice){
             $clientservice->nowserving = 0;
@@ -247,16 +280,16 @@ class ClientsController extends Controller
 
         $id_clientservice = Clientservice::find($clientservice_id);
 
-        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->update(array('nowserving'=> 0));
+         $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
 
-//        foreach($clientservices as $clientservice){
-//            $clientservice->nowserving = 0;
-//            $clientservice->save();
-//        }
-//        $clientservices->save();
+            foreach($clientservices as $clientservice){
 
+                $clientservice->nowserving=0;
+                $clientservice->save();
+            }
 
         $id_clientservice->nowserving = 1;
+        $id_clientservice->playsound = 1;
         $id_clientservice->save();
 
         return response()->json(['success' => 'Client updated!']);

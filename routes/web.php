@@ -40,6 +40,8 @@ Route::put('/admin/services/{id}','AdminServicesController@update')->name('admin
 //dashboard
 
 Route::get('dashboard','DashboardController@index')->name('dashboard');
+Route::post('/dashboard/checkdbupdate','DashboardController@checkdbupdate')->name('dashboard.checkdbupdate');
+Route::post('/dashboard/updateplaysound','DashboardController@updateplaysound')->name('dashboard.updateplaysound');
 
 // users
 
@@ -71,9 +73,12 @@ Route::put('/admin/offices/{id}','AdminOfficesController@update')->name('admin.o
 
 Route::get('/employee', 'EmployeeController@index')->name('employee.index');
 Route::get('/employee/servedclients', 'EmployeeController@servedClient')->name('employee.served');
+Route::get('/employee/servedclientstoday', 'EmployeeController@servedClientToday')->name('employee.servedtoday');
+Route::get('/employee/pendingclients', 'EmployeeController@pendingClient')->name('employee.pending');
 
 //javascript
 Route::post('/employee/updateclient','ClientsController@updateclient')->name('client.updateclient');
+Route::post('/employee/updatestatusclient','ClientsController@updateservedclient')->name('client.updateservedclient');
 Route::post('/employee/updateserve','ClientsController@updateserve')->name('client.updateserve');
 //Route::post('/employee/updateserving','ClientsController@updateserving')->name('client.updateserving');
 

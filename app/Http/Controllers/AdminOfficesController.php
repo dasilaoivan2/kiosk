@@ -20,7 +20,7 @@ class AdminOfficesController extends Controller
      */
     public function index()
     {
-        $offices = Office::get()->all();
+        $offices = Office::orderBy('window', 'ASC')->get();
         return view ('admin.offices.index')->with('offices',$offices);
     }
 

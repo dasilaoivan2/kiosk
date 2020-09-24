@@ -8,11 +8,8 @@
 
     <style>
 
-        .bg {
-            background-color: #43c0b1;
-            font-weight: bold;
-            color: white;
-
+        .redborder{
+            border-bottom: dotted red 3px;
         }
 
 
@@ -22,36 +19,60 @@
 @section('content')
     <div class="container-fluid">
 
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-
-                <marquee width="100%" direction="left" scrollamount="12">
-                    <h1 style="font-size: 55pt; font-weight: bold ; color: black">N O W &nbsp S E R V I N G! &nbsp&nbsp
-                        N O W &nbsp S E R V I N G! &nbsp&nbsp N O W &nbsp S E R V I N G! &nbsp&nbsp N O W &nbsp S E R V
-                        I N G!&nbsp&nbsp</h1>
-                </marquee>
-            </div>
-        </div>
+        <marquee width="100%" direction="left" scrollamount="12">
+            <h1 style="font-size: 50pt; font-weight: bold; font-family: 'GROBOLD'; color: yellow">N O W  &nbsp  S E R V I N G!  &nbsp&nbsp   N O W &nbsp S E R V I N G!   &nbsp&nbsp  N O W &nbsp S E R V I N G! &nbsp&nbsp N O W &nbsp S E R V I N G!&nbsp&nbsp</h1>
+        </marquee>
 
         <div class="row">
-            <div class="col-md-8">
-                @include('dashboard.nowserving');
+            <div style="border-bottom: dotted white 3px" class="col-md-6 text-center">
+                <h2 style="color: white; font-weight: bold">OFFICE NAME</h2>
             </div>
-            <div class="col-md-4">
-                @include('dashboard.adds')
+
+            <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                <h2 style="color: white; font-weight: bold">WINDOW</h2>
+            </div>
+
+            <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                <h2 style="color: white; font-weight: bold">PRIORITY NO.</h2>
             </div>
         </div>
+
+        @php
+
+            $now = date('Y-m-d');
+
+        @endphp
+
+
+        @foreach($offices as $office)
+
+            <div class="row" id="officename{{$office->id}}">
+                <div style="border-bottom: dotted white 3px" class="col-md-6 text-center">
+                    <h2 style="color: white; font-weight: bold">{{$office->name}}</h2>
+                </div>
+                <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                    <h2 style="color: white; font-weight: bold">{{$office->window}}</h2>
+                </div>
+                <div style="border-bottom: dotted white 3px" class="col-md-3 text-center">
+                    <h2 style="color: white; font-weight: bold" id="prioritynum{{$office->id}}">
+                        @foreach($office->clientservices as $clientservice)
+                            @if($clientservice->nowserving == 1 && $clientservice->client->status == 0)
+                                {{$clientservice->client->priority_no}}
+                            @endif
+                        @endforeach
+                    </h2>
+                </div>
+            </div>
+        @endforeach
+
+
+
     </div>
-
-
-
-
-
 @endsection
 
 @section('customScripts')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
             function playsound() {
@@ -106,7 +127,7 @@
                             if (data['playsound'] == 1 && data['nowserving'] == 1) {
 
                                 $(prioritynumdom).html(data['priority_no']);
-                                $(officedomid).addClass("bg");
+                                $(officedomid).addClass("redborder");
                                 playsound();
                             }
 
@@ -119,6 +140,7 @@
             }
 
             checkdbupdate();
+
 
 
         });

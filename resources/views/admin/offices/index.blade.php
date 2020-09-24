@@ -90,7 +90,7 @@
         $(document).ready(function () {
 
             $('#sortedTable').DataTable({
-                "paging": true,
+                "paging": false,
                 "columnDefs": [{
                     "targets": [0, 1, 2, 3],
                     "orderable": true

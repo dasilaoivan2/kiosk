@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         {{ date("l, F d, Y")}}
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -13,27 +13,8 @@
                     <h4>Welcome: {{Auth::user()->name}}</h4>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm-3">
                         <div class="container-fluid p-3 my-3 bg-dark text-white">
-                            <h4>Services</h4>
-
-
-                            <?php $temp = 0;?>
-                            @foreach($user->userservices as $userservice)
-
-                                <?php $temp++;?>
-
-                                <p>{{$temp}}. {{$userservice->service->description}}.</p>
-
-
-                            @endforeach
-
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="container-fluid p-3 my-3 bg-dark text-white">
-                            <h4>Clients</h4>
+                            <h4>Clients Served</h4>
                             <div class="table-responsive">
                                 <table id="sortedTable" class="table table-striped table-sm text-white">
                                     <thead>
@@ -44,6 +25,7 @@
                                         <th>Barangay</th>
                                         <th>Services Acquired</th>
                                         <th>Priority No.</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -55,9 +37,9 @@
                                     @foreach($user->userservices as $userservice)
 
 
-                                        @foreach($userservice->clients as $clientservice)
+                                        @foreach($userservice->clientsServed as $clientservice)
 
-                                            @if($clientservice->client->status==2)
+                                            @if($clientservice->client->status==1)
 
                                                 <?php $temp++;?>
                                                 <tr>
@@ -67,26 +49,21 @@
                                                     <td>{{$clientservice->client->barangay->name}}</td>
                                                     <td>{{$userservice->service->description}}</td>
                                                     <td>{{$clientservice->client->priority_no}}</td>
+                                                    <td>{{$clientservice->client->created_at->format('M d, Y')}}</td>
                                                     <td>
 
-                                                        <button value="{{$clientservice->client->id}}"
+                                                        <button disabled value="{{$clientservice->client->id}}"
                                                                 id="btn{{$clientservice->client->id}}"
                                                                 status="{{$clientservice->client->status}}"
                                                                 class="btnupdateclient btn
 
 @if($clientservice->client->status==0)
                                                                         btn-danger
-@elseif($clientservice->client->status==1)
-                                                                        btn-warning
 @else
                                                                         btn-primary
 @endif">
                                                             @if($clientservice->client->status==0)
-                                                                Pending<br>
-                                                                <small style="font-size: xx-small">(Serve this no.)
-                                                                </small>
-                                                            @elseif($clientservice->client->status==1)
-                                                                Now Serving
+                                                                Pending
                                                             @else
                                                                 Served
                                                             @endif
@@ -110,8 +87,7 @@
 
                 </div>
             </div>
-        </div>
-    </div>
+
 
 
 

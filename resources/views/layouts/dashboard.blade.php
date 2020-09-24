@@ -22,7 +22,7 @@
     <style>
         html, body {
             /*responsive bg*/
-            background-image: url("{{asset('public/storage/dashboard-bg.jpg')}}");
+            background-image: url("{{asset('public/storage/dashboard-bg-new.jpg')}}");
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;
@@ -140,5 +140,7 @@
         @yield('content')
     </main>
 </div>
+
+@yield('customScripts')
 </body>
 </html>
