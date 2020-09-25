@@ -12,4 +12,6 @@
 
     <li class="nav-item btn"> <a style="color: white; text-decoration: none" href="{{route('admin.offices.index')}}"><i class="fas fa-kaaba"></i> Offices </a></li>
 
+    <li class="nav-item btn"> <a style="color: white; text-decoration: none" href="{{route('admin.ads.index')}}"><i class="fas fa-ad"></i> Ads </a></li>
+
 </ul>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>KIOSK</title>
 
     <script src="{{ asset('public/js/all.js') }}"></script>
     <!-- Fonts -->

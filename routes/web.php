@@ -68,6 +68,13 @@ Route::post('/admin/offices', 'AdminOfficesController@store')->name('admin.offic
 Route::get('/admin/offices/edit/{id}','AdminOfficesController@edit')->name('admin.offices.edit');
 Route::put('/admin/offices/{id}','AdminOfficesController@update')->name('admin.offices.update');
 
+// Advertisements
+Route::get('/admin/ads', 'AdminAdsController@index')->name('admin.ads.index');
+Route::get('/admin/ads/create', 'AdminAdsController@create')->name('admin.ads.create');
+Route::post('/admin/ads', 'AdminAdsController@store')->name('admin.ads.store');
+Route::get('/admin/ads/edit/{id}','AdminAdsController@edit')->name('admin.ads.edit');
+Route::put('/admin/ads/{id}','AdminAdsController@update')->name('admin.ads.update');
+
 
 //EMPLOYEE ROUTES
 
