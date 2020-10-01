@@ -32,6 +32,11 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::label('contact_no', 'Contact No.') !!}
+                            {!! Form::tel('contact_no',$office->contact_no,['class'=>'form-control','placeholder'=>'Type here...','autofocus']) !!}
+                        </div>
+
+                        <div class="form-group">
                             @if($office->icon!="")
 
                                 <img width="200px" src="{{asset('public/storage/icons/'.($office->icon))}}">

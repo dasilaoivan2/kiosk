@@ -19,6 +19,7 @@ class CreateOfficesTable extends Migration
             $table->text('code');
             $table->integer('window')->nullable();
             $table->text('icon')->nullable();
+            $table->text('contact_no')->nullable();
             $table->timestamps();
         });
     }
