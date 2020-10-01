@@ -32,6 +32,11 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::label('contact_no', 'Contact No.') !!}
+                            {!! Form::text('contact_no',null,['class'=>'form-control','placeholder'=>'Type here...','autofocus']) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::label('icon', 'Office Icon') !!}
                             {!! Form::file('icon',['class'=>'form-control ' . ( $errors->has('icon') ? ' is-invalid' : '' ),'accept'=>'image/*','capture'=>'camera']) !!}
                         </div>

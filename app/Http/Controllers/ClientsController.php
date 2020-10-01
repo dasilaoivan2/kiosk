@@ -10,6 +10,8 @@ use App\Office;
 use App\Userservice;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class ClientsController extends Controller
 {
     /**
@@ -20,7 +22,7 @@ class ClientsController extends Controller
     public function index()
     {
 //        $offices = Office::get()->all();
-        $offices = Office::orderBy('window','ASC')->get();
+        $offices = Office::orderBy('window', 'ASC')->get();
         $services = Service::get()->sortBy('description');
         return view('client.index')->with(['services' => $services, 'offices' => $offices]);
     }
@@ -34,7 +36,7 @@ class ClientsController extends Controller
     public function office()
     {
 //        $offices = Office::get()->all();
-        $offices = Office::orderBy('window','ASC')->get();
+        $offices = Office::orderBy('window', 'ASC')->get();
         return view('client.byoffice')->with(['offices' => $offices]);
     }
 
@@ -156,6 +158,56 @@ class ClientsController extends Controller
 //
 //    }
 
+//    public function storeClient()
+//    {
+//
+//        $name = $_POST['name'];
+//        $contact_no = $_POST['contact_no'];
+//        $barangay_id = $_POST['barangay_id'];
+//        $service_id = $_POST['service_id'];
+//
+//        $now = date('Y-m-d');
+//
+//        $service = Service::find($service_id);
+//        $office_id = $service->office_id;
+//
+//        $count = Clientservice::where('office_id', '=', $office_id)->whereDate('created_at', $now)->count();
+//
+//
+//        $service_count = Clientservice::get()->count();
+//
+//        $count_sl = $service_count + 1;
+//
+//
+//        $priority_no = $count + 1;
+//
+//        $sl_no = $service->id . "-" . $count_sl;
+//
+//
+//        $client = new Client;
+//
+//        $client->sl_no = $sl_no;
+//        $client->name = $name;
+//        $client->contact_no = $contact_no;
+//        $client->barangay_id = $barangay_id;
+//        $client->priority_no = $priority_no;
+//        $client->status = 0;
+//        $client->save();
+//
+//
+//        $clientservice = new Clientservice;
+//        $clientservice->client_id = $client->id;
+//        $clientservice->service_id = $service_id;
+//        $clientservice->office_id = $office_id;
+//        $clientservice->nowserving = 0;
+//        $clientservice->save();
+//co
+//        return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
+//
+//    }
+
+//    new code with message
+
     public function storeClient()
     {
 
@@ -200,7 +252,26 @@ class ClientsController extends Controller
         $clientservice->nowserving = 0;
         $clientservice->save();
 
+        $office = Office::find($office_id);
+
+        $this->sendmessage($office->contact_no, "KIOSK", 'KIOSK: You have a client on queue.');
+
+
         return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
+
+    }
+
+    private function sendmessage($to, $from, $message)
+    {
+
+        $basic = new \Nexmo\Client\Credentials\Basic('15614f63', '07YNYqW8EDSD2j3u');
+        $client1 = new \Nexmo\Client($basic);
+
+        $client1->message()->send([
+            'to' => $to,
+            'from' => $from,
+            'text' => $message
+        ]);
 
     }
 
@@ -213,8 +284,6 @@ class ClientsController extends Controller
 //        $status = $_POST['status'];
 
 
-
-
         $client = Client::find($id);
         $client->status = 1;
         $client->save();
@@ -224,11 +293,10 @@ class ClientsController extends Controller
 
         $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
 
-        foreach($clientservices as $clientservice){
+        foreach ($clientservices as $clientservice) {
             $clientservice->nowserving = 0;
             $clientservice->save();
         }
-
 
 
         return response()->json(['success' => 'Client updated!']);
@@ -245,8 +313,6 @@ class ClientsController extends Controller
 //        $status = $_POST['status'];
 
 
-
-
         $client = Client::find($id);
         $client->status = 0;
         $client->save();
@@ -256,11 +322,10 @@ class ClientsController extends Controller
 
         $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
 
-        foreach($clientservices as $clientservice){
+        foreach ($clientservices as $clientservice) {
             $clientservice->nowserving = 0;
             $clientservice->save();
         }
-
 
 
         return response()->json(['success' => 'Client updated!']);
@@ -277,16 +342,15 @@ class ClientsController extends Controller
 //        $status = $_POST['status'];
 
 
-
         $id_clientservice = Clientservice::find($clientservice_id);
 
-         $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
+        $clientservices = Clientservice::where('office_id', $id_clientservice->office_id)->get();
 
-            foreach($clientservices as $clientservice){
+        foreach ($clientservices as $clientservice) {
 
-                $clientservice->nowserving=0;
-                $clientservice->save();
-            }
+            $clientservice->nowserving = 0;
+            $clientservice->save();
+        }
 
         $id_clientservice->nowserving = 1;
         $id_clientservice->playsound = 1;

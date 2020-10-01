@@ -66,6 +66,7 @@ class AdminOfficesController extends Controller
         $office->name = $request->input('name');
         $office->code = $request->input('code');
         $office->window = $request->input('window');
+        $office->contact_no = $request->input('contact_no');
         $office->icon = $nameOfFile;
 
 
@@ -122,6 +123,7 @@ class AdminOfficesController extends Controller
         $office->name = $request->input('name');
         $office->code = $request->input('code');
         $office->window = $request->input('window');
+        $office->contact_no = $request->input('contact_no');
 
         if($request->hasFile('icon'))
 

@@ -26,6 +26,7 @@
                             {!! Form::text('email',$userservice->user->email,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
                         </div>
 
+
                         <div class="form-group">
                             {!! Form::label('service_id', 'Assign Services') !!}
                             {!! Form::select('service_id',$services,null,['class'=>'form-control','placeholder'=>'Select Services...','required']) !!}

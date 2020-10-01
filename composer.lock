@@ -157,6 +157,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -171,6 +172,8 @@
                     "type": "tidelift"
                 }
             ],
+=======
+>>>>>>> a0c7589079fe43e6578d054d83f7ac109316a604
             "time": "2020-08-25T05:50:16+00:00"
         },
         {
@@ -853,12 +856,15 @@
                 "psr-17",
                 "psr-7"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
+=======
+>>>>>>> a0c7589079fe43e6578d054d83f7ac109316a604
             "time": "2020-09-03T14:29:41+00:00"
         },
         {
@@ -907,12 +913,15 @@
                 "laminas",
                 "zf"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
+=======
+>>>>>>> a0c7589079fe43e6578d054d83f7ac109316a604
             "time": "2020-09-14T14:23:00+00:00"
         },
         {
@@ -1370,6 +1379,7 @@
                 "JWS",
                 "jwt"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://github.com/lcobucci",
@@ -1380,6 +1390,8 @@
                     "type": "patreon"
                 }
             ],
+=======
+>>>>>>> a0c7589079fe43e6578d054d83f7ac109316a604
             "time": "2020-08-20T13:22:28+00:00"
         },
         {
