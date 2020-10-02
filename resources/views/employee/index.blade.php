@@ -14,35 +14,18 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="container-fluid p-3 my-3 bg-dark text-white">
-                            <h4>Services</h4>
-
-
-                            <?php $temp = 0;?>
-                            @foreach($user->userservices as $userservice)
-
-                                <?php $temp++;?>
-
-                                <p>{{$temp}}. {{$userservice->service->description}}.</p>
-
-
-                            @endforeach
-
-                        </div>
-                    </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <div class="container-fluid p-3 my-3 bg-dark text-white">
                             <h4>Clients</h4>
                             <div class="table-responsive">
-                                <table id="sortedTable" class="table table-striped table-sm text-white">
+                                <table id="sortedTable" class="table table-striped table-responsive-sm text-white">
                                     <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Contact No.</th>
-                                        <th>Barangay</th>
-                                        <th>Services Acquired</th>
+                                        {{--<th>Barangay</th>--}}
+                                        {{--<th>Services Acquired</th>--}}
                                         <th>Priority No.</th>
                                         <th>Serving</th>
                                         <th>Action</th>
@@ -65,8 +48,8 @@
                                                     <td>{{$temp}}</td>
                                                     <td>{{$clientservice->client->name}}</td>
                                                     <td>{{$clientservice->client->contact_no}}</td>
-                                                    <td>{{$clientservice->client->barangay->name}}</td>
-                                                    <td>{{$userservice->service->description}}</td>
+                                                    {{--<td>{{$clientservice->client->barangay->name}}</td>--}}
+                                                    {{--<td>{{$userservice->service->description}}</td>--}}
                                                     <td>{{$clientservice->client->priority_no}}</td>
                                                     <td>
                                                         <button value="{{$clientservice->client->id}}"
@@ -94,15 +77,15 @@
                                                     <td>
 
                                                         <button value="{{$clientservice->client->id}}"
-                                                                         id="btn{{$clientservice->client->id}}"
-                                                                         clientservice_id="{{$clientservice->id}}"
-                                                                         status="{{$clientservice->client->status}}"
-                                                                         class="btnupdateclient btn
+                                                                id="btn{{$clientservice->client->id}}"
+                                                                clientservice_id="{{$clientservice->id}}"
+                                                                status="{{$clientservice->client->status}}"
+                                                                class="btnupdateclient btn
 
 @if($clientservice->client->status==0)
-                                                                                 btn-danger
+                                                                        btn-danger
 @else
-                                                                                 btn-primary
+                                                                        btn-primary
 @endif">
                                                             @if($clientservice->client->status==0)
                                                                 Serve
@@ -125,10 +108,29 @@
 
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="container-fluid p-3 my-3 bg-dark text-white">
+                            <h4>Services</h4>
 
+
+                            <?php $temp = 0;?>
+                            @foreach($user->userservices as $userservice)
+
+                                <?php $temp++;?>
+
+                                <p>{{$temp}}. {{$userservice->service->description}}.</p>
+
+
+                            @endforeach
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -224,7 +226,6 @@
 
 //                $(text).text('OK').removeClass('btn-danger').addClass('btn-primary');
                 window.location.reload();
-
 
 
             }).fail(function () {

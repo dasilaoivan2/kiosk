@@ -57,7 +57,6 @@ class AdminUsersController extends Controller
             'password'=>'required',
             'service_id'=>'required',
 
-
         ]);
 
         date_default_timezone_set('Asia/Manila');
