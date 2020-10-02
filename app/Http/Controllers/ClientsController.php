@@ -254,8 +254,8 @@ class ClientsController extends Controller
 
         $office = Office::find($office_id);
 
-        $this->sendmessage($office->contact_no, "KIOSK", 'KIOSK: You have a client on queue.');
-
+//        $this->sendmessage($office->contact_no, "KIOSK", 'KIOSK: You have a client on queue.');
+        $this->sendmessage($office->contact_no,"KIOSK",'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code);
 
         return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
 
