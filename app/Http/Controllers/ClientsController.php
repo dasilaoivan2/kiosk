@@ -255,25 +255,77 @@ class ClientsController extends Controller
         $office = Office::find($office_id);
 
 //        $this->sendmessage($office->contact_no, "KIOSK", 'KIOSK: You have a client on queue.');
-        $this->sendmessage($office->contact_no,"KIOSK",'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code);
+
+//        $this->sendmessage($office->contact_no,"KIOSK",'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code);
+
+
+        $message = 'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code;
+
+
+// desktop server
+        $this->SendMessageDiafaan("192.168.21.192", '9710', "admin", "mfadmin@123465", $office->contact_no, $message);
+
+//        laptop server
+//        $this->SendMessageDiafaan("192.168.20.101", '9710', "admin", "JunelJig@1980", $office->contact_no, $message);
+
 
         return response()->json(['success' => 'Data saved!', 'client_id' => $client->id]);
 
     }
 
-    private function sendmessage($to, $from, $message)
+    private function SendMessageDiafaan($host, $port, $userName, $password, $number, $message)
     {
+        /* Create a TCP/IP socket. */
+        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        if ($socket === false) {
+            return "socket_create() failed: reason: " . socket_strerror(socket_last_error());
+        }
 
-        $basic = new \Nexmo\Client\Credentials\Basic('15614f63', '07YNYqW8EDSD2j3u');
-        $client1 = new \Nexmo\Client($basic);
+        /* Make a connection to the Diafaan SMS Server host */
+        $result = socket_connect($socket, $host, $port);
+        if ($result === false) {
+            return "socket_connect() failed.\nReason: ($result) " . socket_strerror(socket_last_error($socket));
+        }
 
-        $client1->message()->send([
-            'to' => $to,
-            'from' => $from,
-            'text' => $message
-        ]);
+        /* Create the HTTP API query string */
+        $query = '/http/send-message/';
+        $query .= '?username='.urlencode($userName);
+        $query .= '&password='.urlencode($password);
+        $query .= '&to='.urlencode($number);
+        $query .= '&message='.urlencode($message);
 
+        /* Send the HTTP GET request */
+        $in = "GET ".$query." HTTP/1.1\r\n";
+        $in .= "Host: www.myhost.com\r\n";
+        $in .= "Connection: Close\r\n\r\n";
+        $out = '';
+        socket_write($socket, $in, strlen($in));
+
+        /* Get the HTTP response */
+        $out = '';
+        while ($buffer = socket_read($socket, 2048)) {
+            $out = $out.$buffer;
+        }
+        socket_close($socket);
+
+        /* Extract the last line of the HTTP response to filter out the HTTP header and get the send result*/
+        $lines = explode("\n", $out);
+        return end($lines);
     }
+
+//    private function sendmessage($to, $from, $message)
+//    {
+//
+//        $basic = new \Nexmo\Client\Credentials\Basic('15614f63', '07YNYqW8EDSD2j3u');
+//        $client1 = new \Nexmo\Client($basic);
+//
+//        $client1->message()->send([
+//            'to' => $to,
+//            'from' => $from,
+//            'text' => $message
+//        ]);
+//
+//    }
 
 
     public function updateclient()
