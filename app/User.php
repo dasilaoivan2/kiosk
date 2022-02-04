@@ -14,6 +14,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Userservice');
     }
 
+    public function office(){
+        return $this->belongsTo('App\Office');
+    }
+
+    public function services()
+    {
+        return $this->hasMany('App\Service','office_id', 'office_id');
+    }
+
 
 
     /**

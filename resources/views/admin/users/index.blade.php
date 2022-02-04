@@ -33,27 +33,41 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Assigned Services</th>
+                            <th style="background-color: antiquewhite" colspan="2" class="text-center">Services</th>
+                            <th>Office</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <?php $temp = 0;?>
-                        @foreach($userservices as $userservice)
+                        @foreach($users as $user)
                             <tr>
                                 <?php $temp++;?>
 
                                 <td>{{$temp}}</td>
-                                <td>{{$userservice->user->name}}</td>
-                                <td>
-                                    {{$userservice->service->description}}
-                                    <a class="btn btn-primary btn-sm rounded-pill" href="{{route('admin.users.addservice',['id'=>$userservice->user_id])}}"><i class="fas fa-plus-circle"></i></a>
-
-
+                                <td>{{$user->name}}</td>
+                                <td class="text-center" style="background-color: antiquewhite">
+                                    <a class="btn btn-secondary btn-sm rounded-circle"
+                                       href="{{route('admin.users.addservice',['id'=>$user->id])}}"><i
+                                                class="fas fa-plus-circle"></i>
+                                    </a>
+                                    <small>Add</small>
+                                    <span class="badge badge-dark">{{$user->services->count()}}</span>
                                 </td>
+                                <td style="background-color: antiquewhite">
+                                    <a class="btn btn-success btn-sm rounded-circle"
+                                       href="{{route('admin.users.services.index',['id'=>$user->id])}}"><i
+                                                class="fas fa-search"></i>
+                                    </a>
+                                    <small>View</small>
+                                    <span class="badge badge-dark">{{$user->userservices->count()}}</span>
+                                </td>
+                                <td>{{$user->office->code}}</td>
                                 <td>
-                                    <a class="btn btn-success btn-sm" href="{{route('admin.users.edit',['id'=>$userservice->id])}}"><i class="fas fa-edit"></i> EDIT</a>
+                                    <a class="btn btn-success btn-sm"
+                                       href="{{route('admin.users.edit',['id'=>$user->id])}}"><i
+                                                class="fas fa-edit"></i> EDIT</a>
                                 </td>
                             </tr>
                         @endforeach

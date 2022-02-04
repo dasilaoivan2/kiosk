@@ -31972,8 +31972,8 @@ return jQuery;
      * compiled({ 'users': ['fred', 'barney'] });
      * // => '<li>fred</li><li>barney</li>'
      *
-     * // Use the internal `print` function in "evaluate" delimiters.
-     * var compiled = _.template('<% print("hello " + user); %>!');
+     * // Use the internal `prints` function in "evaluate" delimiters.
+     * var compiled = _.template('<% prints("hello " + user); %>!');
      * compiled({ 'user': 'barney' });
      * // => 'hello barney!'
      *
@@ -32115,7 +32115,7 @@ return jQuery;
         ) +
         (isEvaluating
           ? ', __j = Array.prototype.join;\n' +
-            "function print() { __p += __j.call(arguments, '') }\n"
+            "function prints() { __p += __j.call(arguments, '') }\n"
           : ';\n'
         ) +
         source +

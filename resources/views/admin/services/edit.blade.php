@@ -17,17 +17,27 @@
                         {!!Form::model($service, ['route' => ['admin.services.update', $service->id], 'files' => true])!!}
 
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description') !!}
-                            {!! Form::text('desc',$service->description,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
+                            {!! Form::label('client_desc', 'Service Name (for Clients view)') !!}
+                            {!! Form::text('client_desc',$service->client_desc,['class'=>'form-control','placeholder'=>'Type here...','autofocus']) !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('desc_bisaya', 'Bisayan Language') !!}
+                            {!! Form::label('desc_bisaya', 'Bisayan Language (for Clients view)') !!}
                             {!! Form::text('desc_bisaya',$service->desc_vernacular,['class'=>'form-control','placeholder'=>'Type here...','autofocus']) !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('location_id', 'Location') !!}
+                            {!! Form::label('desc_name', 'Service Name', ['class' => 'font-weight-bold']) !!}
+                            {!! Form::text('desc_name',$service->desc_name,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('desc', 'Description of Service', ['class' => 'font-weight-bold']) !!}
+                            {!! Form::text('desc',$service->description,['class'=>'form-control','placeholder'=>'Type here...','autofocus']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('location_id', 'Location (Optional)') !!}
                             {!! Form::select('location_id',$locations,$service->location_id,['class'=>'form-control','placeholder'=>'Select Location...']) !!}
                         </div>
 
@@ -37,9 +47,40 @@
                         {{--</div>--}}
 
                         <div class="form-group">
-                            {!! Form::label('office_id', 'Office') !!}
+                            {!! Form::label('office_id', 'Office', ['class' => 'font-weight-bold']) !!}
                             {!! Form::select('office_id',$offices,$service->office_id,['class'=>'form-control','placeholder'=>'Select Office...','required']) !!}
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('classification_id', 'Classification', ['class' => 'font-weight-bold']) !!}
+                            {!! Form::select('classification_id',$classifications,$service->classification_id,['class'=>'form-control','placeholder'=>'Select Office...','required']) !!}
+                        </div>
+
+                        {{--<div class="form-group">--}}
+                            {{--{!! Form::label('transactiontype_id', 'Type of Transaction') !!}--}}
+                            {{--{!! Form::select('transactiontype_id',$transactiontypes,$service->transaction_id,['class'=>'form-control','placeholder'=>'Select Office...','required']) !!}--}}
+                        {{--</div>--}}
+
+                        <div class="form-group">
+                            {!! Form::label('availability', 'Who may Avail', ['class' => 'font-weight-bold']) !!}
+                            {!! Form::text('availability',$service->availability,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
+                        </div>
+
+                        {{--<div class="form-group">--}}
+                            {{--@if($service->fileattachment!="")--}}
+
+                                {{--<img width="200px" src="{{asset('public/storage/fileattachments/'.($service->fileattachment))}}">--}}
+
+                            {{--@else--}}
+                                {{--<img width="200px" src="{{asset('public/storage/fileattachments/no_image.png')}}">--}}
+
+                            {{--@endif--}}
+                        {{--</div>--}}
+
+                        {{--<div class="form-group">--}}
+                            {{--{!! Form::label('fileattachment', 'File Attachment') !!}--}}
+                            {{--{!! Form::file('fileattachment',['class'=>'form-control ' . ( $errors->has('icon') ? ' is-invalid' : '' ),'accept'=>'image/*','capture'=>'camera']) !!}--}}
+                        {{--</div>--}}
 
                         <div class="form-group">
                             @if($service->icon!="")
@@ -53,7 +94,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('icon', 'Service Icon') !!}
+                            {!! Form::label('icon', 'Service Icon', ['class' => 'font-weight-bold']) !!}
                             {!! Form::file('icon',['class'=>'form-control ' . ( $errors->has('icon') ? ' is-invalid' : '' ),'accept'=>'image/*','capture'=>'camera']) !!}
                         </div>
 

@@ -40,7 +40,7 @@
 
                                 {{--{{Form::hidden('service_id',$service->id)}}--}}
 
-                                {{--{!! Form::submit('Submit',['class'=>'btn btn-primary', 'id'=>'print']) !!}--}}
+                                {{--{!! Form::submit('Submit',['class'=>'btn btn-primary', 'id'=>'prints']) !!}--}}
 
                                 {{--{!! Form::close() !!}--}}
 
@@ -122,7 +122,7 @@
     <script>
         $(document).ready(function () {
 
-            $("#print").click(function(){
+            $("#prints").click(function(){
                 if($('#description').val()!="" && $('#contact_no').val()!="" && $('#barangay_id').val()!="") {
                     $.ajaxSetup(
                         {
