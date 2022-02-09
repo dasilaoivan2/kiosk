@@ -17,7 +17,7 @@
                 </div>
 
                 @foreach($services as $service)
-                    <a style="color: black; width: 547px; height: 90px; text-wrap: normal; border: solid 1px #b21f2d; font-weight: bolder" class="btn btn-success btn-lg" href="{{route('client.create',['id'=>$service->id])}}">{{$service->description}}
+                    <a style="color: black; width: 547px; height: 90px; text-wrap: normal; border: solid 1px #b21f2d; font-weight: bolder" class="btn btn-success btn-lg" href="{{route('client.create',['id'=>$service->id])}}">{{$service->desc_name}}
 
                          @if($service->desc_vernacular == NULL)
 

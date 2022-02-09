@@ -122,8 +122,13 @@
     <script>
         $(document).ready(function () {
 
+<<<<<<< HEAD
             $("#print").click(function(){
                 if($('#name').val()!="" && $('#contact_no').val()!="" && $('#barangay_id').val()!="") {
+=======
+            $("#prints").click(function(){
+                if($('#description').val()!="" && $('#contact_no').val()!="" && $('#barangay_id').val()!="") {
+>>>>>>> 21f52d36ca89764063826be7b0869d4cdba3cbd5
                     $.ajaxSetup(
                         {
 
