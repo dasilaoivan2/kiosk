@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>KIOSK</title>
+    <title>Kiosk</title>
 
     <script src="{{ asset('public/js/all.js') }}"></script>
     <!-- Fonts -->
@@ -15,6 +15,7 @@
     <style>
         html, body {
             /*responsive bg*/
+            {{--background-image: url("{{asset('public/storage/vaccination-bg.jpg')}}");--}}
             background-image: url("{{asset('public/storage/kiosk-bg.jpg')}}");
             background-position: center center;
             background-attachment: fixed;

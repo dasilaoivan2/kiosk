@@ -19,5 +19,9 @@ class Client extends Model
     public function clientservices(){
         return $this->hasMany('App\Clientservice');
     }
+    public function clientservice(){
+        return $this->hasOne('App\Clientservice');
+    }
+
 
 }

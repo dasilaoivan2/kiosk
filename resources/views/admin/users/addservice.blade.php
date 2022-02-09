@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    @include('layouts.inc.title',['title'=>"Responsible Employee - Add"])
+    @include('layouts.inc.title',['title'=>"Responsible Employee - Services -Add"])
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="col-md-8">
                 <div class="card text-center">
                     <div class="card-header">
-                        <h3>ADD ADDITIONAL SERVICES</h3>
+                        <h3>ADD USER SERVICES</h3>
 
                         <h4>Name : {{$user->name}}</h4>
 

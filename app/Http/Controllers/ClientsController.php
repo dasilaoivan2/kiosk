@@ -21,7 +21,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-//        $offices = Office::get()->all();
+//      $offices = Office::get()->all();
         $offices = Office::orderBy('window', 'ASC')->get();
         $services = Service::get()->sortBy('description');
         return view('client.index')->with(['services' => $services, 'offices' => $offices]);
@@ -259,11 +259,11 @@ class ClientsController extends Controller
 //        $this->sendmessage($office->contact_no,"KIOSK",'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code);
 
 
-        $message = 'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code;
+  //      $message = 'KIOSK: You have a client on queue. Client name: '.$client->name.", Contact No.: ".$contact_no.", Service: ".$service->description.", Office: ".$office->code;
 
 
 // desktop server
-        $this->SendMessageDiafaan("192.168.21.192", '9710', "admin", "mfadmin@123465", $office->contact_no, $message);
+//        $this->SendMessageDiafaan("192.168.20.7", '9710', "admin", "mfadmin@123465", $office->contact_no, $message);
 
 //        laptop server
 //        $this->SendMessageDiafaan("192.168.20.101", '9710', "admin", "JunelJig@1980", $office->contact_no, $message);
