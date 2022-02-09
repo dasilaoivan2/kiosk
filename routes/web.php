@@ -233,5 +233,5 @@ Route::get('/client/create/{id}', 'ClientsController@create')->name('client.crea
 //Route::post('/client/{id}', 'ClientsController@store')->name('client.store'laotr);
 Route::post('/client', 'ClientsController@storeClient')->name('client.storeclient');
 
-Route::get('/client/prints/{id}/{service}','ClientsController@printPriority')->name('client.printpriority');
+Route::get('/client/print/{id}/{service}','ClientsController@printPriority')->name('client.printpriority');
 
