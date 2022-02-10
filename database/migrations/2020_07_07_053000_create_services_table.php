@@ -20,6 +20,7 @@ class CreateServicesTable extends Migration
             $table->integer('location_id')->nullable();
             $table->integer('office_id');
             $table->text('icon')->nullable();
+            $table->integer('counter')->nullable();
             $table->timestamps();
         });
     }

@@ -75,6 +75,19 @@ Route::post('/admin/ads', 'AdminAdsController@store')->name('admin.ads.store');
 Route::get('/admin/ads/edit/{id}','AdminAdsController@edit')->name('admin.ads.edit');
 Route::put('/admin/ads/{id}','AdminAdsController@update')->name('admin.ads.update');
 
+//prints
+Route::get('/admin/prints/daily', 'AdminPrintsController@dailyindex')->name('admin.prints.daily.index');
+Route::post('/admin/prints/searchDaily', 'AdminPrintsController@dailysearch')->name('admin.prints.daily.search');
+Route::post('/admin/prints/printDaily', 'AdminPrintsController@dailyprint')->name('admin.prints.daily.print');
+
+Route::get('/admin/prints/monthly', 'AdminPrintsController@monthlyindex')->name('admin.prints.monthly.index');
+Route::post('/admin/prints/searchmonthly', 'AdminPrintsController@monthlysearch')->name('admin.prints.monthly.search');
+Route::post('/admin/prints/printmonthly', 'AdminPrintsController@monthlyprint')->name('admin.prints.monthly.print');
+
+Route::get('/admin/prints/range', 'AdminPrintsController@rangeindex')->name('admin.prints.range.index');
+Route::post('/admin/prints/searchrange', 'AdminPrintsController@rangesearch')->name('admin.prints.range.search');
+Route::post('/admin/prints/printrange', 'AdminPrintsController@rangeprint')->name('admin.prints.range.print');
+
 
 //EMPLOYEE ROUTES
 

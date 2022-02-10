@@ -31972,8 +31972,8 @@ return jQuery;
      * compiled({ 'users': ['fred', 'barney'] });
      * // => '<li>fred</li><li>barney</li>'
      *
-     * // Use the internal `print` function in "evaluate" delimiters.
-     * var compiled = _.template('<% print("hello " + user); %>!');
+     * // Use the internal `prints` function in "evaluate" delimiters.
+     * var compiled = _.template('<% prints("hello " + user); %>!');
      * compiled({ 'user': 'barney' });
      * // => 'hello barney!'
      *
@@ -32115,7 +32115,7 @@ return jQuery;
         ) +
         (isEvaluating
           ? ', __j = Array.prototype.join;\n' +
-            "function print() { __p += __j.call(arguments, '') }\n"
+            "function prints() { __p += __j.call(arguments, '') }\n"
           : ';\n'
         ) +
         source +
@@ -49839,8 +49839,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\kiosk\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\kiosk\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/bacmanolo/kiosk/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/bacmanolo/kiosk/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
