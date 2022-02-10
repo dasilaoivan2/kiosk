@@ -42,9 +42,17 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+<<<<<<< HEAD
                             <th>Barangay</th>
                             <th>Service Acquired</th>
                             <th>Office</th>
+=======
+                            <th>Contact No.</th>
+                            <th>Barangay</th>
+                            <th>Service Acquired</th>
+                            <th>Office</th>
+                            <th>Date</th>
+>>>>>>> ba53c88843617dc422f43a3e882e8c3da14ef120
 
                         </tr>
                         </thead>
@@ -58,8 +66,15 @@
                                 <td>{{$temp}}</td>
                                 <td>{{$client->name}}</td>
                                 <td>{{$client->barangay->name}}</td>
+<<<<<<< HEAD
                                 <td>{{$client->clientservice->service->description}}</td>
                                 <td>{{$client->clientservice->service->office->code}}</td>
+=======
+                                <td>{{$client->contact_no}}</td>
+                                <td>{{$client->clientservice->service->description}}</td>
+                                <td>{{$client->clientservice->service->office->code}}</td>
+                                <td>{{$client->created_at->format('M d Y')}}</td>
+>>>>>>> ba53c88843617dc422f43a3e882e8c3da14ef120
 
                             </tr>
                         @endforeach
@@ -102,4 +117,8 @@
         });
     </script>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> ba53c88843617dc422f43a3e882e8c3da14ef120

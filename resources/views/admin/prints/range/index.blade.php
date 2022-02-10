@@ -59,8 +59,24 @@
                         </thead>
                         <tbody>
 
+<<<<<<< HEAD
                         <?php $temp = 0;?>
                        
+=======
+{{--                        <?php $temp = 0;?>--}}
+{{--                        @foreach($clients as $client)--}}
+{{--                            <tr>--}}
+{{--                                <?php $temp++;?>--}}
+
+{{--                                <td>{{$temp}}</td>--}}
+{{--                                <td>{{$client->name}}</td>--}}
+{{--                                <td>{{$client->barangay->name}}</td>--}}
+{{--                                <td>{{$client->clientservice->service->description}}</td>--}}
+{{--                                <td>{{$client->clientservice->service->office->code}}</td>--}}
+
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
+>>>>>>> ba53c88843617dc422f43a3e882e8c3da14ef120
                         </tbody>
                     </table>
                 </div>

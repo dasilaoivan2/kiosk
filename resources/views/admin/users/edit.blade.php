@@ -14,24 +14,22 @@
 
 
                     <div class="card-body">
-                        {!!Form::model($userservice, ['route' => ['admin.users.update', $userservice->id]])!!}
+                        {!!Form::model($user, ['route' => ['admin.users.update', $user->id]])!!}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Name') !!}
-                            {!! Form::text('name',$userservice->user->name,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
+                            {!! Form::text('name',$user->name,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('email', 'Email') !!}
-                            {!! Form::text('email',$userservice->user->email,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
+                            {!! Form::text('email',$user->email,['class'=>'form-control','placeholder'=>'Type here...','autofocus','required']) !!}
                         </div>
-
 
                         <div class="form-group">
-                            {!! Form::label('service_id', 'Assign Services') !!}
-                            {!! Form::select('service_id',$services,null,['class'=>'form-control','placeholder'=>'Select Services...','required']) !!}
+                            {!! Form::label('office_id', 'Office') !!}
+                            {!! Form::select('office_id',$offices,$user->office->id,['class'=>'form-control','placeholder'=>'Select Office...','required']) !!}
                         </div>
-
 
 
 

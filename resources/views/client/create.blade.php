@@ -121,7 +121,6 @@
 
     <script>
         $(document).ready(function () {
-
             $("#print").click(function(){
                 if($('#name').val()!="" && $('#contact_no').val()!="" && $('#barangay_id').val()!="") {
                     $.ajaxSetup(
